@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, Button, TouchableHighlight, Text, View, TextInput} from 'react-native';
+import {StyleSheet, Button, View, TextInput, Alert} from 'react-native';
 
 export default function Form({ addHandler }) {
     const [text, setValue] = useState('');
@@ -7,12 +7,13 @@ export default function Form({ addHandler }) {
     const onChange = (text) => {
         setValue(text)
     };
-	return (
-        <View>
-            <TextInput style={styles.input} onChangeText={onChange}  placeholder='Впишите задачу...'/>
-        <Button color='green' onPress={() => addHandler(text)} title='Добавить задачу' />
-        </View>
-	);
+
+        return (
+            <View>
+                <TextInput style={styles.input} onChangeText={onChange}  placeholder='Впишите задачу...'/>
+            <Button color='green' onPress={() => addHandler(text)} title='Добавить задачу' />
+            </View>
+        );
 }
 
 const styles = StyleSheet.create({

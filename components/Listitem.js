@@ -1,24 +1,28 @@
 import React from 'react';
-import { StyleSheet, TouchableHighlight, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 
-export default function ListItem({ el }) {
+export default function ListItem({ el, deleteHandler }) {
 	return (
-        <TouchableHighlight>
+        <TouchableOpacity onLongPress={() =>
+            Alert.alert('Delete', 'Do you really want to delete this task?', [
+      {
+        text: 'Cancel',
+      },
+      {text: 'OK', onPress: () => deleteHandler(el.key)},
+    ])}>
             <Text style={styles.text}>{el.text}</Text>
-        </TouchableHighlight>
-	);
-}
+        </TouchableOpacity>
+	)};
 
 const styles = StyleSheet.create({
-    text: {
-        padding: 20,
-        textAlign: 'center',
-        borderRadius: 5,
-        backgroundColor: '#fafafa',
-        borderWidth: 1,
-        marginTop: 20,
-        width: '60%',
-        marginLeft: '20%'
+            text: {
+                padding: 20,
+                textAlign: 'center',
+                borderRadius: 5,
+                backgroundColor: '#fafafa',
+                borderWidth: 1,
+                marginTop: 20,
+                width: '60%',
+                marginLeft: '20%'
 
-    }
-});
+            }});
