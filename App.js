@@ -1,30 +1,38 @@
-import React from 'react';
-import { StyleSheet, View, SafeAreaView, Text } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, FlatList, Text } from 'react-native';
+import Header from "./components/Header";
+import ListItem from "./components/Listitem";
+import Form from "./components/Form";
 
 export default function App() {
+	const [listOfItems, setListOfItems] = useState([
+		{text: 'Купить молока', index: 1},
+		{text: 'Помыть машину', index: 2},
+		{text: 'Купить картошку', index: 3},
+		{text: 'Купить слона', index: 4},
+	])
+
+	const addHandler = (text) => {
+		setListOfItems((list) => {
+			return [
+				{ text: text, index: 5 },
+				...list
+			]
+		})
+	}
+
 	return (
-		<SafeAreaView>
-			<View style={styles.box}>
-				<Text style={styles.text}>Hello!</Text>
+		<View>
+			<Header/>
+			<Form addHandler={addHandler} />
+			<View>
+				<FlatList data={listOfItems} renderItem={({ item }) => (
+					<ListItem el={item} />
+				)} />
 			</View>
-		</SafeAreaView>
+		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	box: {
-		width: 100,
-		height: 100,
-		backgroundColor: '#eb4034',
-		borderRadius: 50,
-		margin: 30,
-		borderWidth: 6,
-		borderColor: '#b52e24'
-	},
-	text: {
-		textAlign: 'center',
-		lineHeight: 90,
-		color: '#fff',
-		fontWeight: 'bold'
-	}
-});
+// const styles = StyleSheet.create({
+//
+// });
